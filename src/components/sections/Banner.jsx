@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Masonry from '@/components/Masonry';
 import CurvedLoop from '@/components/CurvedLoop';
 import StickerPeel from '@/components/StickerPeel'
+import AnimatedContent from '@/components/AnimatedContent'
 import image from '/images/Gatito_alien.png'
 
 const useMediaQuery = query => {
@@ -11,7 +12,6 @@ const useMediaQuery = query => {
         const mediaQuery = window.matchMedia(query);
         const handleChange = event => setMatches(event.matches);
 
-        setMatches(mediaQuery.matches);
         mediaQuery.addEventListener('change', handleChange);
 
         return () => mediaQuery.removeEventListener('change', handleChange);
@@ -110,6 +110,25 @@ const Banner = () => {
                         interactive
                         className="custom-text-style"
                     />
+                </div>
+                <div className='animated-container'>
+                    <AnimatedContent
+                        distance={60}
+                        direction="vertical"
+                        reverse={false}
+                        duration={1}
+                        ease="bounce.out"
+                        initialOpacity={0}
+                        animateOpacity
+                        scale={1}
+                        threshold={0}
+                        delay={1}
+                    >
+                        <div className='confeti-container'>
+                            <img src="/images/confeti_right.png" alt="confeti" width="612" height="334" />
+                            <img src="/images/confeti_left.png" alt="confeti" width="612" height="334" />
+                        </div>
+                    </AnimatedContent>
                 </div>
             </div>
         </>

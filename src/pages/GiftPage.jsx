@@ -1,5 +1,4 @@
 import Banner  from '@/components/sections/Banner'
-
 const GiftPage = () => {
 
     return (
