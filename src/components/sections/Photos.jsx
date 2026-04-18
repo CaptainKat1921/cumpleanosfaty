@@ -1,31 +1,31 @@
 import Stack from '@/components/Stack'
 const Photos = () => {
     const images1 = [
-        "/photos/Us/first/1.jpeg",
-        "/photos/Us/first/2.jpeg",
-        "/photos/Us/first/3.jpeg",
-        "/photos/Us/first/4.jpeg",
-        "/photos/Us/first/5.jpeg",
-        "/photos/Us/first/6.jpeg",
-        "/photos/Us/first/7.jpeg",
+        "/photos/Us/first/1.avif",
+        "/photos/Us/first/2.avif",
+        "/photos/Us/first/3.avif",
+        "/photos/Us/first/4.avif",
+        "/photos/Us/first/5.avif",
+        "/photos/Us/first/6.avif",
+        "/photos/Us/first/7.avif",
     ];
     const images2 = [
-        "/photos/Us/second/1.jpeg",
-        "/photos/Us/second/2.jpeg",
-        "/photos/Us/second/3.jpeg",
-        "/photos/Us/second/4.jpeg",
-        "/photos/Us/second/5.jpeg",
-        "/photos/Us/second/6.jpeg",
-        "/photos/Us/second/7.jpeg",
+        "/photos/Us/second/1.avif",
+        "/photos/Us/second/2.avif",
+        "/photos/Us/second/3.avif",
+        "/photos/Us/second/4.avif",
+        "/photos/Us/second/5.avif",
+        "/photos/Us/second/6.avif",
+        "/photos/Us/second/7.avif",
     ];
     const images3 = [
-        "/photos/Us/third/1.jpeg",
-        "/photos/Us/third/2.jpeg",
-        "/photos/Us/third/3.jpeg",
-        "/photos/Us/third/4.jpeg",
-        "/photos/Us/third/5.jpeg",
-        "/photos/Us/third/6.jpeg",
-        "/photos/Us/third/7.jpeg",
+        "/photos/Us/third/1.avif",
+        "/photos/Us/third/2.avif",
+        "/photos/Us/third/3.avif",
+        "/photos/Us/third/4.avif",
+        "/photos/Us/third/5.avif",
+        "/photos/Us/third/6.avif",
+        "/photos/Us/third/7.avif",
     ];
     return (
         <>
