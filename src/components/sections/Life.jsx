@@ -1,11 +1,12 @@
 import LogoLoop from '@/components/LogoLoop';
+
 const imageLogos = [
-    { src: "https://placehold.co/500x500/png", alt: "Company 1", href: "https://company1.com" },
-    { src: "https://placehold.co/500x500/png", alt: "Company 2", href: "https://company2.com" },
-    { src: "https://placehold.co/500x500/png", alt: "Company 3", href: "https://company3.com" },
-    { src: "https://placehold.co/500x500/png", alt: "Company 1", href: "https://company1.com" },
-    { src: "https://placehold.co/500x500/png", alt: "Company 2", href: "https://company2.com" },
-     { src: "/images/UFO.gif", alt: "Company 3", href: "https://company3.com" },
+    { src: "/photos/Life/1.jpeg", alt: "Recuerdo de vida 1", width: 960, height: 1280 },
+    { src: "/photos/Life/2.jpeg", alt: "Recuerdo de vida 2", width: 1200, height: 1600 },
+    { src: "/photos/Life/3.jpeg", alt: "Recuerdo de vida 3", width: 1500, height: 1000 },
+    { src: "/photos/Life/1.jpeg", alt: "Recuerdo de vida 1", width: 960, height: 1280 },
+    { src: "/photos/Life/2.jpeg", alt: "Recuerdo de vida 2", width: 1200, height: 1600 },
+    { src: "/images/UFO.gif", alt: "OVNI animado", width: 480, height: 480 },
 ];
 
 const Life = () => {
@@ -27,7 +28,7 @@ const Life = () => {
                             scaleOnHover
                             fadeOut={false}
                             fadeOutColor="#021326"
-                            ariaLabel="Technology partners"
+                            ariaLabel="Recuerdos de vida"
                         />
                     </div>
                 </div>

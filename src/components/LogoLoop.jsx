@@ -10,8 +10,10 @@ const toCssLength = value => (typeof value === 'number' ? `${value}px` : (value 
 
 const cx = (...parts) => parts.filter(Boolean).join(' ');
 
-const useResizeObserver = (callback, elements, dependencies) => {
+const useResizeObserver = (callback, elements) => {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     if (!window.ResizeObserver) {
       const handleResize = () => callback();
       window.addEventListener('resize', handleResize);
@@ -30,10 +32,10 @@ const useResizeObserver = (callback, elements, dependencies) => {
     return () => {
       observers.forEach(observer => observer?.disconnect());
     };
-  }, [callback, elements, dependencies]);
+  }, [callback, elements]);
 };
 
-const useImageLoader = (seqRef, onLoad, dependencies) => {
+const useImageLoader = (seqRef, onLoad, imageLoadKey) => {
   useEffect(() => {
     const images = seqRef.current?.querySelectorAll('img') ?? [];
 
@@ -66,10 +68,63 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
         img.removeEventListener('error', handleImageLoad);
       });
     };
-  }, [onLoad, seqRef, dependencies]);
+  }, [onLoad, seqRef, imageLoadKey]);
 };
 
-const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical) => {
+const usePageVisibility = () => {
+  const [isPageVisible, setIsPageVisible] = useState(() => (
+    typeof document === 'undefined' || document.visibilityState === 'visible'
+  ));
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const handleVisibilityChange = () => {
+      setIsPageVisible(document.visibilityState === 'visible');
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  return isPageVisible;
+};
+
+const useInView = ref => {
+  const [isInView, setIsInView] = useState(true);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (
+      !element ||
+      typeof window === 'undefined' ||
+      !('IntersectionObserver' in window)
+    ) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: '200px 0px' }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return isInView;
+};
+
+const useAnimationLoop = (
+  trackRef,
+  targetVelocity,
+  seqWidth,
+  seqHeight,
+  isHoveredRef,
+  hoverSpeed,
+  isVertical,
+  isActive
+) => {
   const rafRef = useRef(null);
   const lastTimestampRef = useRef(null);
   const offsetRef = useRef(0);
@@ -94,7 +149,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
       track.style.transform = transformValue;
     }
 
-    if (prefersReduced) {
+    if (prefersReduced || !isActive || seqSize <= 0) {
       track.style.transform = isVertical ? 'translate3d(0, 0, 0)' : 'translate3d(0, 0, 0)';
       return () => {
         lastTimestampRef.current = null;
@@ -109,7 +164,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
       const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
       lastTimestampRef.current = timestamp;
 
-      const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
+      const target = isHoveredRef.current && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
 
       const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
       velocityRef.current += (target - velocityRef.current) * easingFactor;
@@ -137,7 +192,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
       }
       lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
+  }, [targetVelocity, seqWidth, seqHeight, isHoveredRef, hoverSpeed, isVertical, isActive, trackRef]);
 };
 
 export const LogoLoop = memo(({
@@ -164,7 +219,10 @@ export const LogoLoop = memo(({
   const [seqWidth, setSeqWidth] = useState(0);
   const [seqHeight, setSeqHeight] = useState(0);
   const [copyCount, setCopyCount] = useState(ANIMATION_CONFIG.MIN_COPIES);
-  const [isHovered, setIsHovered] = useState(false);
+  const isHoveredRef = useRef(false);
+  const observedRefs = useMemo(() => [containerRef, seqRef], []);
+  const isInView = useInView(containerRef);
+  const isPageVisible = usePageVisibility();
 
   const effectiveHoverSpeed = useMemo(() => {
     if (hoverSpeed !== undefined) return hoverSpeed;
@@ -212,22 +270,33 @@ export const LogoLoop = memo(({
     }
   }, [isVertical]);
 
-  useResizeObserver(
-    updateDimensions,
-    [containerRef, seqRef],
-    [logos, gap, logoHeight, isVertical]
+  useResizeObserver(updateDimensions, observedRefs);
+
+  const imageLoadKey = useMemo(() =>
+    logos
+      .map(item => ('node' in item ? item.ariaLabel ?? item.title ?? 'node' : `${item.src ?? ''}|${item.srcSet ?? ''}`))
+      .join('::'),
+    [logos]
   );
 
-  useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const frame = window.requestAnimationFrame(updateDimensions);
+    return () => window.cancelAnimationFrame(frame);
+  }, [updateDimensions, logos, gap, logoHeight, isVertical]);
+
+  useImageLoader(seqRef, updateDimensions, imageLoadKey);
 
   useAnimationLoop(
     trackRef,
     targetVelocity,
     seqWidth,
     seqHeight,
-    isHovered,
+    isHoveredRef,
     effectiveHoverSpeed,
-    isVertical
+    isVertical,
+    isInView && isPageVisible
   );
 
   const cssVariables = useMemo(() => ({
@@ -249,10 +318,10 @@ export const LogoLoop = memo(({
     ), [isVertical, scaleOnHover, className]);
 
   const handleMouseEnter = useCallback(() => {
-    if (effectiveHoverSpeed !== undefined) setIsHovered(true);
+    if (effectiveHoverSpeed !== undefined) isHoveredRef.current = true;
   }, [effectiveHoverSpeed]);
   const handleMouseLeave = useCallback(() => {
-    if (effectiveHoverSpeed !== undefined) setIsHovered(false);
+    if (effectiveHoverSpeed !== undefined) isHoveredRef.current = false;
   }, [effectiveHoverSpeed]);
 
   const renderLogoItem = useCallback((item, key) => {
