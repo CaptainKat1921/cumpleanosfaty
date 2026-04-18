@@ -54,7 +54,7 @@ const Masonry = ({
   colorShiftOnHover = false
 }) => {
   const columns = useMedia(
-    ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
+    ['(min-width:1000px)', '(min-width:600px)', '(min-width:300px)', '(min-width:200px)'],
     [5, 4, 3, 2],
     1
   );
@@ -188,8 +188,13 @@ const Masonry = ({
           key={item.id}
           data-key={item.id}
           className="absolute box-content"
-          style={{ willChange: 'transform, width, height, opacity' }}
-          onClick={() => window.open(item.url, '_blank', 'noopener')}
+          style={{
+            willChange: 'transform, width, height, opacity',
+            cursor: item.url ? 'pointer' : 'default'
+          }}
+          onClick={() => {
+            if (item.url) window.open(item.url, '_blank', 'noopener');
+          }}
           onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}>
           <div

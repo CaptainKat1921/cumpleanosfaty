@@ -24,53 +24,20 @@ const Banner = () => {
     const isTabletUp = useMediaQuery('(min-width: 1024px)');
 
     const items = [
-        {
-            id: "1",
-            img: "https://picsum.photos/id/1015/600/900?grayscale",
-            url: "https://example.com/one",
-            height: 400,
-        },
-        {
-            id: "2",
-            img: "https://picsum.photos/id/1011/600/750?grayscale",
-            url: "https://example.com/two",
-            height: 250,
-        },
-        {
-            id: "3",
-            img: "https://picsum.photos/id/1020/600/800?grayscale",
-            url: "https://example.com/three",
-            height: 600,
-        },
-        {
-            id: "4",
-            img: "https://picsum.photos/id/1015/600/900?grayscale",
-            url: "https://example.com/one",
-            height: 400,
-        },
-        {
-            id: "5",
-            img: "https://picsum.photos/id/1011/600/750?grayscale",
-            url: "https://example.com/two",
-            height: 250,
-        },
-        {
-            id: "6",
-            img: "https://picsum.photos/id/1020/600/800?grayscale",
-            url: "https://example.com/three",
-            height: 600,
-        },
-        {
-            id: "7",
-            img: "https://picsum.photos/id/1020/600/800?grayscale",
-            url: "https://example.com/three",
-            height: 600,
-        }, {
-            id: "8",
-            img: "https://picsum.photos/id/1011/600/750?grayscale",
-            url: "https://example.com/two",
-            height: 250,
-        }
+        { id: "1", img: "/photos/Banner/1.jpeg", height: isTabletUp ? 600 : 300 },
+        { id: "2", img: "/photos/Banner/2.jpeg", height: isTabletUp ? 500 : 350 },
+        { id: "3", img: "/photos/Banner/3.jpeg", height: isTabletUp ? 700 : 350 },
+        { id: "4", img: "/photos/Banner/4.jpeg", height: isTabletUp ? 900 : 450 },
+        { id: "5", img: "/photos/Banner/5.jpeg", height: isTabletUp ? 600 : 300 },
+        { id: "9", img: "/photos/Banner/9.jpeg", height: isTabletUp ? 600 : 300 },
+        { id: "7", img: "/photos/Banner/7.jpeg", height: isTabletUp ? 800 : 400 },
+        { id: "8", img: "/photos/Banner/8.jpeg", height: isTabletUp ? 600 : 350 },
+        { id: "6", img: "/photos/Banner/6.jpeg", height: isTabletUp ? 700 : 350 },
+        { id: "11", img: "/photos/Banner/11.jpeg", height: isTabletUp ? 1000 : 500 },
+        { id: "12", img: "/photos/Banner/12.jpeg", height: isTabletUp ? 700 : 350 },
+        { id: "13", img: "/photos/Banner/13.jpeg", height: isTabletUp ? 700 : 300 },
+        { id: "14", img: "/photos/Banner/14.jpeg", height: isTabletUp ? 600 : 500 },
+        { id: "15", img: "/photos/Banner/15.jpeg", height: isTabletUp ? 600 : 300 },
 
     ];
     return (

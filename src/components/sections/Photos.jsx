@@ -1,10 +1,31 @@
 import Stack from '@/components/Stack'
 const Photos = () => {
-    const images = [
-        "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format"
+    const images1 = [
+        "/photos/Us/first/1.jpeg",
+        "/photos/Us/first/2.jpeg",
+        "/photos/Us/first/3.jpeg",
+        "/photos/Us/first/4.jpeg",
+        "/photos/Us/first/5.jpeg",
+        "/photos/Us/first/6.jpeg",
+        "/photos/Us/first/7.jpeg",
+    ];
+    const images2 = [
+        "/photos/Us/second/1.jpeg",
+        "/photos/Us/second/2.jpeg",
+        "/photos/Us/second/3.jpeg",
+        "/photos/Us/second/4.jpeg",
+        "/photos/Us/second/5.jpeg",
+        "/photos/Us/second/6.jpeg",
+        "/photos/Us/second/7.jpeg",
+    ];
+    const images3 = [
+        "/photos/Us/third/1.jpeg",
+        "/photos/Us/third/2.jpeg",
+        "/photos/Us/third/3.jpeg",
+        "/photos/Us/third/4.jpeg",
+        "/photos/Us/third/5.jpeg",
+        "/photos/Us/third/6.jpeg",
+        "/photos/Us/third/7.jpeg",
     ];
     return (
         <>
@@ -19,7 +40,7 @@ const Photos = () => {
                                 randomRotation={false}
                                 sensitivity={200}
                                 sendToBackOnClick={true}
-                                cards={images.map((src, i) => (
+                                cards={images1.map((src, i) => (
                                     <img
                                         key={i}
                                         src={src}
@@ -38,7 +59,7 @@ const Photos = () => {
                                 randomRotation={false}
                                 sensitivity={200}
                                 sendToBackOnClick={true}
-                                cards={images.map((src, i) => (
+                                cards={images2.map((src, i) => (
                                     <img
                                         key={i}
                                         src={src}
@@ -57,7 +78,7 @@ const Photos = () => {
                                 randomRotation={false}
                                 sensitivity={200}
                                 sendToBackOnClick={true}
-                                cards={images.map((src, i) => (
+                                cards={images3.map((src, i) => (
                                     <img
                                         key={i}
                                         src={src}
