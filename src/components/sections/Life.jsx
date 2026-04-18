@@ -7,7 +7,8 @@ const imageLogos = [
     { src: "/photos/Life/4.jpg", alt: "Recuerdo de vida 4", width: 2428, height: 2488 },
     { src: "/photos/Life/5.jpg", alt: "Recuerdo de vida 5", width: 991, height: 1438 },
     { src: "/photos/Life/6.jpg", alt: "Recuerdo de vida 6", width: 2264, height: 3172 },
-    { src: "/images/UFO.gif", alt: "OVNI animado", width: 480, height: 480 },
+    { src: "/images/UFO.gif", alt: "OVNI animado", width: 480, height: 480 },    
+    { src: "/photos/Life/12.jpeg", alt: "Recuerdo de vida 12", width: 1692, height: 2552 },
     { src: "/photos/Life/7.jpg", alt: "Recuerdo de vida 7", width: 1692, height: 2552 },
     { src: "/photos/Life/8.jpg", alt: "Recuerdo de vida 8", width: 2120, height: 3104 },
     { src: "/photos/Life/9.jpeg", alt: "Recuerdo de vida 9", width: 1280, height: 960 },
@@ -21,7 +22,7 @@ const Life = () => {
             <div className="life-container">
                 <div className='carrousel-container'>
                     <div className='lifetext-container'>
-                        <h2>Una vista a todo lo que has logrado...</h2>
+                        <h2>Tu historia, contada en imágenes...</h2>
                     </div>
                     <div className='logoloop-container'>
                         <LogoLoop

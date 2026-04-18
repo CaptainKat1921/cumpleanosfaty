@@ -1,7 +1,7 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import GiftPage from './pages/giftPage';
+import GiftPage from './pages/GiftPage';
 
 function App() {
   return (
