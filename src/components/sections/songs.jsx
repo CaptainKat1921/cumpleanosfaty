@@ -3,6 +3,11 @@ const Songs = () => {
     return (
         <>
             <div className="songs-container">
+                <div className="song-text-container">
+                    <h2>
+                        Nuestras canciones...
+                    </h2>
+                </div>
                 <div className="spotify-container">
                     <div className="repoductor-container">
                         <iframe
@@ -16,7 +21,9 @@ const Songs = () => {
                             loading="lazy"
                         />
                     </div>
-                    <div></div>
+                    <div className="music-cat-container">
+                        <img src="/images/Gatito_musica.gif" alt="cat" />
+                    </div>
                 </div>
             </div>
         </>

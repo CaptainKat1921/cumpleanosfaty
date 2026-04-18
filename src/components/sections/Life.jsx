@@ -3,6 +3,9 @@ const imageLogos = [
     { src: "https://placehold.co/500x500/png", alt: "Company 1", href: "https://company1.com" },
     { src: "https://placehold.co/500x500/png", alt: "Company 2", href: "https://company2.com" },
     { src: "https://placehold.co/500x500/png", alt: "Company 3", href: "https://company3.com" },
+    { src: "https://placehold.co/500x500/png", alt: "Company 1", href: "https://company1.com" },
+    { src: "https://placehold.co/500x500/png", alt: "Company 2", href: "https://company2.com" },
+     { src: "/images/UFO.gif", alt: "Company 3", href: "https://company3.com" },
 ];
 
 const Life = () => {
@@ -16,7 +19,7 @@ const Life = () => {
                     <div className='logoloop-container'>
                         <LogoLoop
                             logos={imageLogos}
-                            speed={40}
+                            speed={60}
                             direction="right"
                             logoHeight={300}
                             gap={60}

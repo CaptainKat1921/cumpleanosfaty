@@ -2,6 +2,7 @@ import Banner  from '@/components/sections/Banner'
 import Life from '@/components/sections/Life'
 import Photos from '@/components/sections/Photos'
 import Songs from '@/components/sections/Songs'
+import Letter from '@/components/sections/Letter'
 const GiftPage = () => {
 
     return (
@@ -20,7 +21,7 @@ const GiftPage = () => {
                     <Songs />
                 </div>
                 <div className="letter-section">
-
+                    <Letter />
                 </div>
 
             </div>
